@@ -6,22 +6,25 @@ import {
   NameType,
 } from "@wharfkit/antelope";
 import { Account } from "@wharfkit/account";
+import { Session } from "@wharfkit/session";
+import { WalletPluginPrivateKey } from "@wharfkit/wallet-plugin-privatekey";
 import { Config } from "../types";
 /**
  * Main class for interacting with wax blockchain
  * Provides a unified interface for token operations, NFT management, trading and more
  *
  * @class WaxAgentToolkit
- * @property {Account} account - Configuration object
+ * @property {Account} account - Account object
+ * @property {Session} session - Session object
  * @property {APIClient} client - Wax RPC connection
  * @property {Config} config - Configuration object
  * @property {PrivateKey} privateKey - Private key of the wallet
- * @property {PublicKey} wallet_address - Public key of the wallet
+ * @property {PublicKey} walletAddress - Public key of the wallet
  */
 
 export class WaxAgentToolkit {
-  //   public account: Account;
-  public client: APIClient;
+  // public account: Account;
+  public session: Session;
   public privateKey: PrivateKey;
   public walletAddress: PublicKey;
   public accountName: string;
@@ -36,6 +39,7 @@ export class WaxAgentToolkit {
    */
   constructor(
     account_name: string,
+    chainId: string,
     private_key: string,
     rpc_url: string,
     openai_api_key: string | null,
@@ -43,6 +47,7 @@ export class WaxAgentToolkit {
 
   constructor(
     account_name: string,
+    chainId: string,
     private_key: string,
     rpc_url: string,
     config?: Config,
@@ -50,16 +55,23 @@ export class WaxAgentToolkit {
 
   constructor(
     account_name: string,
+    chainId: string,
     private_key: string,
     rpc_url: string,
     configOrKey?: Config | string | null,
   ) {
     this.accountName = account_name;
-    this.client = new APIClient({
-      url: rpc_url || "https://api.mainnet-beta.solana.com",
-    });
     this.privateKey = PrivateKey.from(private_key);
     this.walletAddress = this.privateKey.toPublic();
+    this.session = new Session({
+      chain: {
+        id: chainId,
+        url: rpc_url || "https://jungle4.greymass.com",
+      },
+      actor: account_name,
+      permission: "active",
+      walletPlugin: new WalletPluginPrivateKey(private_key),
+    });
 
     // Handle both old and new patterns
     if (typeof configOrKey === "string" || configOrKey === null) {
