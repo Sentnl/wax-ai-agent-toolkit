@@ -1,0 +1,45 @@
+{
+  "name": "wax-langchain",
+  "version": "1.0.0",
+  "description": "connect langchain to wax protocols",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Sentnl/wax-ai-toolkit.git"
+  },
+  "engines": {
+    "node": ">=22.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "keywords": [
+    "WAX",
+    "AI",
+    "Langchain",
+    "Sentnl",
+    "Agent"
+  ],
+  "author": "JoyousGardian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sentnl/wax-ai-toolkit/issues"
+  },
+  "homepage": "https://github.com/Sentnl/wax-ai-toolkit#readme",
+  "dependencies": {
+    "@wharfkit/account": "^1.4.1",
+    "@wharfkit/antelope": "^1.0.13",
+    "ai": "^4.2.11",
+    "dotenv": "^16.4.7",
+    "langchain": "^0.3.19",
+    "langsmith": "^0.3.15",
+    "openai": "^4.91.1",
+    "typedoc": "^0.28.1"
+  },
+  "devDependencies": {
+    "prettier": "^3.5.3",
+    "tsx": "^4.19.3",
+    "typescript": "^5.7.2"
+  }
+}
