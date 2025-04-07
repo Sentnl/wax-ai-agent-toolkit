@@ -4,7 +4,8 @@
   "description": "connect langchain to wax protocols",
   "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docs": "typedoc src --out docs"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,7 @@
   },
   "homepage": "https://github.com/Sentnl/wax-ai-toolkit#readme",
   "dependencies": {
+    "@alcorexchange/alcor-swap-sdk": "^1.0.397",
     "@wharfkit/account": "^1.4.1",
     "@wharfkit/antelope": "^1.0.13",
     "@wharfkit/session": "^1.5.1",

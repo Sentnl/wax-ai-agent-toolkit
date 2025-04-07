@@ -1,4 +1,4 @@
 import { WaxAgentToolkit } from "./agent";
-import { createSolanaTools } from "./langchain";
+// import { createSolanaTools } from "./langchain";
 
-export { WaxAgentToolkit, createSolanaTools };
+export { WaxAgentToolkit };

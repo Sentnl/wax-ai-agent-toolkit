@@ -1,83 +1,92 @@
-import {
-  APIClient,
-  PublicKey,
-  PrivateKey,
-  Name,
-  NameType,
-} from "@wharfkit/antelope";
-import { Account } from "@wharfkit/account";
+import { Name } from "@wharfkit/antelope";
 import { Session } from "@wharfkit/session";
 import { WalletPluginPrivateKey } from "@wharfkit/wallet-plugin-privatekey";
-import { Config } from "../types";
+import {
+  get_balance,
+  get_balance_other,
+  get_token_balance,
+} from "../tools/wax";
+
 /**
- * Main class for interacting with wax blockchain
+ * Main class for interacting with WAX blockchain
  * Provides a unified interface for token operations, NFT management, trading and more
  *
  * @class WaxAgentToolkit
- * @property {Account} account - Account object
- * @property {Session} session - Session object
- * @property {APIClient} client - Wax RPC connection
- * @property {Config} config - Configuration object
- * @property {PrivateKey} privateKey - Private key of the wallet
- * @property {PublicKey} walletAddress - Public key of the wallet
+ * @property {Session} session - WAX session for interacting with the blockchain
+ * @property {string} accountName - Name of the WAX account
  */
-
 export class WaxAgentToolkit {
-  // public account: Account;
   public session: Session;
-  public privateKey: PrivateKey;
-  public walletAddress: PublicKey;
   public accountName: string;
-  public config?: Config;
+
   /**
-   * @deprecated Using openai_api_key directly in constructor is deprecated.
-   * Please use the new constructor with Config object instead:
-   * @example
-   * const agent = new WaxAgentToolkit(accountName, privateKey, rpcUrl, {
-   *   OPENAI_API_KEY: 'your-key'
-   * });
+   * Creates a new instance of WaxAgentToolkit
+   * @param private_key - Private key for the WAX account
+   * @param account_name - Name of the WAX account
+   * @param rpc_url - URL of the WAX RPC endpoint (optional)
+   * @param chainId - Chain ID of the WAX network (optional)
    */
   constructor(
-    account_name: string,
-    chainId: string,
     private_key: string,
-    rpc_url: string,
-    openai_api_key: string | null,
-  );
-
-  constructor(
     account_name: string,
+    rpc_url: string = "https://wax.greymass.com",
     chainId: string,
-    private_key: string,
-    rpc_url: string,
-    config?: Config,
-  );
-
-  constructor(
-    account_name: string,
-    chainId: string,
-    private_key: string,
-    rpc_url: string,
-    configOrKey?: Config | string | null,
   ) {
-    this.accountName = account_name;
-    this.privateKey = PrivateKey.from(private_key);
-    this.walletAddress = this.privateKey.toPublic();
+    // Create a session with the wallet
     this.session = new Session({
       chain: {
         id: chainId,
-        url: rpc_url || "https://jungle4.greymass.com",
+        url: rpc_url,
       },
       actor: account_name,
       permission: "active",
       walletPlugin: new WalletPluginPrivateKey(private_key),
     });
 
-    // Handle both old and new patterns
-    if (typeof configOrKey === "string" || configOrKey === null) {
-      this.config = { OPENAI_API_KEY: configOrKey || "" };
-    } else {
-      this.config = configOrKey as Config;
-    }
+    this.accountName = account_name;
+  }
+
+  /**
+   * Get the balance of WAX or a token for the agent's account
+   * @param tokenContract - Optional token contract name. If not provided, returns WAX balance
+   * @param tokenSymbol - Optional token symbol. If not provided, returns WAX balance
+   * @returns Promise resolving to the balance as a string (e.g., "100.0000 WAX" or "50.0000 TOKEN")
+   */
+  async getBalance(
+    tokenContract?: string,
+    tokenSymbol?: string,
+  ): Promise<string> {
+    return get_balance(this, tokenContract, tokenSymbol);
+  }
+
+  /**
+   * Get the token balances of a WAX account
+   * @param accountName - Optional account name. If not provided, returns agent's account balances
+   * @returns Promise resolving to an object containing WAX balance and token balances
+   */
+  async getTokenBalances(accountName?: string): Promise<{
+    wax: string;
+    tokens: Array<{
+      contract: string;
+      symbol: string;
+      balance: string;
+    }>;
+  }> {
+    return get_token_balance(this, accountName);
+  }
+
+  /**
+   * Get the balance of WAX or a token for another account
+   * @param accountName - Name of the account to check balance for
+   * @param tokenContract - Optional token contract name. If not provided, returns WAX balance
+   * @param tokenSymbol - Optional token symbol. Required if tokenContract is provided
+   * @returns Promise resolving to the balance as a string (e.g., "100.0000 WAX")
+   */
+  async getBalanceOther(
+    accountName: string,
+    tokenContract?: string,
+    tokenSymbol?: string,
+  ): Promise<string> {
+    return get_balance_other(this, accountName, tokenContract, tokenSymbol);
   }
 }

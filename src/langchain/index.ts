@@ -1,1 +1,1 @@
-export * from "./alcor";
+// export * from "./alcor";
