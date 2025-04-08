@@ -5,7 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "docs": "typedoc src --out docs"
+    "docs": "typedoc src --out docs",
+    "tool-summary": "tsx src/utils/analyzeTools.ts"
   },
   "repository": {
     "type": "git",
@@ -39,6 +40,7 @@
     "langchain": "^0.3.19",
     "langsmith": "^0.3.15",
     "openai": "^4.91.1",
+    "tiktoken": "^1.0.20",
     "typedoc": "^0.28.1"
   },
   "devDependencies": {
