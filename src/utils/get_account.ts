@@ -1,11 +1,13 @@
-import { Name } from "@wharfkit/antelope";
-import { WaxAgentToolkit } from "../../agent";
+import { Name, API } from "@wharfkit/antelope";
+import { Account } from "@wharfkit/account";
+import { WaxAgentToolkit } from "../agent";
 
 /**
  * Retrieves account information from the WAX blockchain
  *
+ * @function get_account
  * @param agent - The WaxAgentToolkit instance to use for the blockchain query
- * @param accountName - The name of the WAX account to retrieve information for
+ * @param accountName - Optional name of the WAX account to retrieve information for. If not provided, uses agent's account name
  * @returns Promise resolving to the account information object containing:
  *   - account_name: Name of the account
  *   - ram_quota: RAM quota in bytes
@@ -18,13 +20,29 @@ import { WaxAgentToolkit } from "../../agent";
  *   - self_delegated_bandwidth: Self-delegated bandwidth information
  *   - refund_request: Refund request information (if any)
  *   - voter_info: Voter information (if any)
- * @throws Error if the account doesn't exist or if the RPC request fails
+ * @throws Error if:
+ *   - Account not found
+ *   - Invalid account name
+ *   - Blockchain query fails
+ *   - Network connection issues
+ * @example
+ * ```typescript
+ * // Get agent's own account information
+ * const accountInfo = await get_account(agent);
+ *
+ * // Get another account's information
+ * const otherAccountInfo = await get_account(agent, "sentnltestin");
+ * ```
  */
-export async function get_account(agent: WaxAgentToolkit, accountName: string) {
+export async function get_account(
+  agent: WaxAgentToolkit,
+  accountName?: string,
+): Promise<API.v1.AccountObject> {
   try {
-    const response = await agent.session.fetch("get_account", {
-      account_name: accountName,
-    });
+    const session = await agent.get_session();
+    const response = await session.client.v1.chain.get_account(
+      accountName || agent.accountName,
+    );
 
     if (!response) {
       throw new Error(`Account ${accountName} not found`);

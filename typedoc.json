@@ -1,0 +1,15 @@
+{
+  "entryPoints": ["src/**/*.ts"],
+  "out": "docs",
+  "excludePrivate": true,
+  "excludeProtected": false,
+  "excludeExternals": false,
+  "includeVersion": true,
+  "categorizeByGroup": true,
+  "categoryOrder": ["Core", "Tools", "Utils", "*"],
+  "readme": "README.md",
+  "name": "WAX LangChain Documentation",
+  "theme": "default",
+  "hideGenerator": true,
+  "exclude": ["**/*.test.ts", "**/*.spec.ts", "node_modules/**/*"]
+}

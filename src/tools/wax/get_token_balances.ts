@@ -3,9 +3,28 @@ import { WaxAgentToolkit } from "../../agent";
 
 /**
  * Get the token balances of a WAX account
- * @param agent - WaxAgentToolkit instance
- * @param accountName - Optional account name. If not provided, returns agent's account balances
- * @returns Promise resolving to an object containing WAX balance and token balances with their respective contracts, symbols, and amounts
+ *
+ * @function get_token_balance
+ * @param agent - WaxAgentToolkit instance for blockchain interactions
+ * @param accountName - Optional account name to check balances for. If not provided, returns agent's account balances
+ * @returns Promise resolving to an object containing:
+ *   - wax: WAX balance as string (e.g., "100.0000 WAX")
+ *   - tokens: Array of token balances with:
+ *     - contract: Token contract name (e.g., "eosio.token")
+ *     - symbol: Token symbol (e.g., "TOKEN")
+ *     - balance: Token balance as string (e.g., "50.0000 TOKEN")
+ * @throws Error if:
+ *   - Account name is invalid
+ *   - Blockchain query fails
+ *   - Network connection issues
+ * @example
+ * ```typescript
+ * // Get agent's own balances
+ * const balances = await get_token_balance(agent);
+ *
+ * // Get another account's balances
+ * const otherBalances = await get_token_balance(agent, "sentnltestin");
+ * ```
  */
 export async function get_token_balance(
   agent: WaxAgentToolkit,
@@ -22,14 +41,14 @@ export async function get_token_balance(
     // Use the agent's account name if none provided
     const targetAccount = accountName || agent.accountName;
     const account = Name.from(targetAccount);
+    const session = await agent.get_session();
 
     // Get WAX balance
-    const waxBalances =
-      await agent.session.client.v1.chain.get_currency_balance(
-        Name.from("eosio.token"),
-        account,
-        "WAX",
-      );
+    const waxBalances = await session.client.v1.chain.get_currency_balance(
+      Name.from("eosio.token"),
+      account,
+      "WAX",
+    );
 
     const waxBalance = waxBalances[0]?.toString() || "0.0000 WAX";
 
@@ -44,12 +63,12 @@ export async function get_token_balance(
 
     // Example: Check for a specific token (you would expand this based on your needs)
     try {
-      const tokenBalances =
-        await agent.session.client.v1.chain.get_currency_balance(
-          Name.from("eosio.token"),
-          account,
-          "TOKEN",
-        );
+      const session = await agent.get_session();
+      const tokenBalances = await session.client.v1.chain.get_currency_balance(
+        Name.from("eosio.token"),
+        account,
+        "TOKEN",
+      );
 
       if (tokenBalances.length > 0) {
         tokenBalancesList.push({

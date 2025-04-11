@@ -4,8 +4,9 @@
   "description": "connect langchain to wax protocols",
   "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "docs": "typedoc src --out docs",
+    "test": "tsx test/index.ts",
+    "handtest": "tsx test/test.ts",
+    "docs": "typedoc --out docs --entryPointStrategy expand --excludePrivate false --excludeProtected false --excludeExternals false --includeVersion src",
     "tool-summary": "tsx src/utils/analyzeTools.ts"
   },
   "repository": {
@@ -31,6 +32,8 @@
   "homepage": "https://github.com/Sentnl/wax-ai-toolkit#readme",
   "dependencies": {
     "@alcorexchange/alcor-swap-sdk": "^1.0.397",
+    "@langchain/langgraph": "^0.2.63",
+    "@sentnl/nodepulse": "^1.1.1",
     "@wharfkit/account": "^1.4.1",
     "@wharfkit/antelope": "^1.0.13",
     "@wharfkit/session": "^1.5.1",
@@ -46,6 +49,7 @@
   "devDependencies": {
     "prettier": "^3.5.3",
     "tsx": "^4.19.3",
+    "typedoc-plugin-markdown": "^4.6.2",
     "typescript": "^5.7.2"
   }
 }
