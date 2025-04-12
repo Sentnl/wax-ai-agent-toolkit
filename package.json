@@ -1,0 +1,55 @@
+{
+  "name": "wax-langchain",
+  "version": "1.0.0",
+  "description": "connect langchain to wax protocols",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "tsx test/index.ts",
+    "handtest": "tsx test/test.ts",
+    "docs": "typedoc --out docs --entryPointStrategy expand --excludePrivate false --excludeProtected false --excludeExternals false --includeVersion src",
+    "tool-summary": "tsx src/utils/analyzeTools.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Sentnl/wax-ai-toolkit.git"
+  },
+  "engines": {
+    "node": ">=22.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "keywords": [
+    "WAX",
+    "AI",
+    "Langchain",
+    "Sentnl",
+    "Agent"
+  ],
+  "author": "JoyousGardian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sentnl/wax-ai-toolkit/issues"
+  },
+  "homepage": "https://github.com/Sentnl/wax-ai-toolkit#readme",
+  "dependencies": {
+    "@alcorexchange/alcor-swap-sdk": "^1.0.397",
+    "@langchain/langgraph": "^0.2.63",
+    "@sentnl/nodepulse": "^1.1.1",
+    "@wharfkit/account": "^1.4.1",
+    "@wharfkit/antelope": "^1.0.13",
+    "@wharfkit/session": "^1.5.1",
+    "@wharfkit/wallet-plugin-privatekey": "^1.1.0",
+    "ai": "^4.2.11",
+    "dotenv": "^16.4.7",
+    "langchain": "^0.3.19",
+    "langsmith": "^0.3.15",
+    "openai": "^4.91.1",
+    "tiktoken": "^1.0.20",
+    "typedoc": "^0.28.1"
+  },
+  "devDependencies": {
+    "prettier": "^3.5.3",
+    "tsx": "^4.19.3",
+    "typedoc-plugin-markdown": "^4.6.2",
+    "typescript": "^5.7.2"
+  }
+}

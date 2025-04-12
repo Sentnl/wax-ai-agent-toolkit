@@ -1,0 +1,12 @@
+# Environment Variables
+# Contains sensitive information like API keys and private keys
+.env
+
+# Documentation
+# Generated documentation files
+/docs
+
+# Node.js
+# Dependencies and package management
+node_modules/
+package-lock.json
