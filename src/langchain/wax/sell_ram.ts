@@ -69,7 +69,9 @@ export class WaxSellRamTool extends Tool {
           transaction: result,
         });
       } else {
-        throw new Error("Invalid input. Must provide 'bytes' parameter.");
+        throw new Error(
+          "Invalid input. Must provide 'sell_ram_bytes' parameter.",
+        );
       }
     } catch (error: any) {
       return JSON.stringify({

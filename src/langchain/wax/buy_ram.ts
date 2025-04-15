@@ -22,11 +22,11 @@ export class WaxBuyRamTool extends Tool {
     This tool should be used when you want to purchase RAM for your WAX account.
     For questions like "How do I buy RAM?" or "I need more RAM for my account".
     
-    Input for buying RAM with WAX tokens:
-    {"buy_ram_amount":"1.0000 WAX"}
-    
-    Input for buying RAM with specific bytes:
-    {"buy_ram_bytes":8192}
+    You can buy RAM in two ways:
+    1. Using WAX tokens:
+       {"buy_ram_amount":"1.0000 WAX"}
+    2. Using specific bytes:
+       {"buy_ram_bytes":8192}
     
     Example: To buy RAM with WAX tokens: {"buy_ram_amount":"1.00000000 WAX"}
     Example: To buy RAM with specific bytes: {"buy_ram_bytes":8192}`;
@@ -85,7 +85,7 @@ export class WaxBuyRamTool extends Tool {
         });
       } else {
         throw new Error(
-          "Invalid input. Must provide either 'amount' or 'bytes' parameter.",
+          "Invalid input. Must provide either 'buy_ram_amount' or 'buy_ram_bytes' parameter.",
         );
       }
     } catch (error: any) {
