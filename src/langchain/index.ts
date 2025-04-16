@@ -2,8 +2,7 @@ export * from "./wax";
 
 import { WaxAgentToolkit } from "../agent";
 import {
-  // WaxBalanceOtherTool,
-  WaxBalanceTool,
+  WaxBalanceOtherTool,
   WaxBuyRamTool,
   WaxSellRamTool,
   WaxTransferTool,
@@ -33,8 +32,7 @@ import {
  */
 export function createWaxTools(waxAgentkit: WaxAgentToolkit) {
   return [
-    // new WaxBalanceOtherTool(waxAgentkit),
-    new WaxBalanceTool(waxAgentkit),
+    new WaxBalanceOtherTool(waxAgentkit),
     new WaxBuyRamTool(waxAgentkit),
     new WaxSellRamTool(waxAgentkit),
     new WaxTransferTool(waxAgentkit),

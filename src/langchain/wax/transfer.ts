@@ -17,15 +17,9 @@ export class WaxTransferTool extends Tool {
   name = "wax_transfer";
 
   /** Detailed description of the tool's functionality */
-  description = `Transfer tokens from your WAX account to another account.
-  
-    This tool should be used when you want to transfer tokens from your WAX account to another account.
-    For questions like "How do I transfer tokens?" or "I want to transfer tokens to another account".
-    
-    Input for transferring tokens:
-    {"token_quantity":10, "token_symbol":"WAX", "to":"recipient.wam"}
-    
-    Example: To transfer 10 WAX tokens to another account: {"token_quantity":10, "token_symbol":"WAX", "to":"recipient.wam"}`;
+  description = `Handles token transfers between WAX accounts. 
+  Expects a JSON input with "token_quantity" (amount to transfer), "token_symbol" (e.g. WAX), and "to" (recipient account name). 
+  Example: {"token_quantity": 10, "token_symbol": "WAX", "to": "recipient.wam"}`;
 
   /**
    * Creates a new instance of WaxTransferTool
@@ -56,15 +50,19 @@ export class WaxTransferTool extends Tool {
     try {
       const params = JSON.parse(input);
 
-      if (!params.token_quantity || !params.token_symbol || !params.to) {
-        throw new Error(
-          "Missing required parameters. Must provide token_quantity, token_symbol, and to.",
-        );
+      if (!params.token_quantity || typeof params.token_quantity !== "number") {
+        return '"token_quantity" parameter is missing or invalid. Please provide the quantity of tokens you wanna transfer.';
+      }
+      if (!params.token_symbol || typeof params.token_symbol !== "string") {
+        return '"token_symbol" parameter is missing or invalid. Please provide the symbol of the token you wanna transfer.';
+      }
+      if (!params.to || typeof params.to !== "string") {
+        return '"to" parameter is missing or invalid. Please provide the account name of the recipient.';
       }
 
       const quantity = parseFloat(params.token_quantity);
       if (isNaN(quantity) || quantity <= 0) {
-        throw new Error("Invalid token quantity. Must be a positive number.");
+        return "Invalid token quantity. Must be a positive number.";
       }
 
       const result = await transfer(
@@ -73,6 +71,13 @@ export class WaxTransferTool extends Tool {
         params.token_symbol,
         params.to,
       );
+
+      const userChoices = {
+        quantity,
+        token_symbol: params.token_symbol,
+        to: params.to,
+        action: "transferred",
+      };
 
       return JSON.stringify({
         status: "success",

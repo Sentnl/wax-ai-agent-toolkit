@@ -16,16 +16,11 @@ export class WaxBalanceTool extends Tool {
   name = "wax_balance";
 
   /** Detailed description of the tool's functionality */
-  description = `Get the balance of tokens in your WAX account.
-  
-    This tool should be used when you want to check your token balances.
-    For questions like "What's my balance?" or "How many tokens do I have?".
-    
-    Input for checking balance:
-    {"tokenContract":"eosio.token", "tokenSymbol":"WAX"}
-    
-    Example: To check WAX balance: {"tokenContract":"eosio.token", "tokenSymbol":"WAX"}
-    Example: To check custom token balance: {"tokenContract":"custom.token", "tokenSymbol":"TOKEN"}`;
+  description = `Handles balance checks for your WAX account.
+  Expects a JSON input with "tokenContract" (optional) and "tokenSymbol" (optional).
+  Example: {} for WAX balance
+  Example: {"tokenContract": "eosio.token", "tokenSymbol": "WAX"} for WAX balance
+  Example: {"tokenContract": "custom.token", "tokenSymbol": "TOKEN"} for token balance`;
 
   /**
    * Creates a new instance of WaxBalanceTool

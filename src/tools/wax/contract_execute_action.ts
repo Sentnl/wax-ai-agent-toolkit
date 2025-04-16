@@ -49,7 +49,7 @@ export async function contract_execute_action(
       authorization: [
         {
           actor: agent.accountName,
-          permission: "asset_id",
+          permission: "active", // Changed from "asset_id" to "active" which is the standard permission level
         },
       ],
     });

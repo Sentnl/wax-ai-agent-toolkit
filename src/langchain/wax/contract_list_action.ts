@@ -24,24 +24,15 @@ export class WaxContractListActionTool extends Tool {
   name = "wax_contract_list_action";
 
   /** Detailed description of the tool's functionality */
-  description = `List all available actions of a smart contract on the WAX blockchain.
-  
-    This tool should be used when you need to:
-    - View all available actions of a contract
-    - Understand what operations a contract supports
-    - Debug contract interactions
-    
-    Input format:
-    {
-      "contract_name": "string"  // The name of the contract to query (e.g., "eosio.token")
-    }
-    
-    Examples:
-    1. List actions of eosio.token contract:
-       {"contract_name":"eosio.token"}
-    
-    2. List actions of a custom contract:
-       {"contract_name":"mycontract"}`;
+  description = `Handles listing available actions for a WAX blockchain smart contract.
+  Expects a JSON input with "contract_name" (required).
+  Example: {"contract_name": "eosio.token"} for eosio.token contract actions
+  Example: {"contract_name": "mycontract"} for custom contract actions
+
+  This tool helps you:
+  - View all available actions of a contract
+  - Understand what operations a contract supports 
+  - Debug contract interactions`;
 
   /**
    * Creates a new instance of WaxContractListAction
