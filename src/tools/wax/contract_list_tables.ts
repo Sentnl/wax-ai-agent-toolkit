@@ -51,7 +51,7 @@ export async function contract_list_tables(
       throw new Error(`Contract ${contract_name} has no tables`);
     }
 
-    return contract.table("assets").scopes().abi.tables;
+    return contract.abi.tables;
   } catch (error) {
     if (error instanceof Error) {
       throw new Error(
