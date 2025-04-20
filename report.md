@@ -81,8 +81,9 @@ The toolkit is designed for developers building AI-powered applications on the W
 
 
 
-### Testing examples:
+## Testing examples:
 
+### Get account info for sentnlagents
 ```
 Prompt: get account info for sentnlagents
 
@@ -130,7 +131,7 @@ If you need any further information or assistance, feel free to ask!
 ```
 
 
-Perform a token transfer:
+### Perform a token transfer:
 
 ```
 Prompt: perform a transfer of 100.00000000 WAX from sentnlagents to sentnltestin
@@ -141,7 +142,7 @@ Chatbot: The transfer of **100.00000000 WAX** from **sentnlagents** to **sentnlt
 You can view the transaction details [here](https://testnet.waxblock.io/transaction/4900c61ff444bd6dc2159fa9bc57708d84c697edd062148326ef3e383f722155).
 ```
 
-List available actions for eosio.token contract
+### List available actions for eosio.token contract
 
 ```
 Prompt: can you list the available actions for the eosio.token contract
@@ -197,4 +198,23 @@ Chatbot: The transfer of **200.00000000 WAX** from **sentnlagents** to **sentnlt
 
 You can view the transaction details [here](https://testnet.waxblock.io/transaction/5b2fbb3e31aacba21d23f9464cd0f48bb1ed9edeec705ed7c4c9fd4cc48447d1).
 
+```
+
+
+
+### list all the tables in the eosio.token contract
+
+
+```
+Prompt: can you list all the tables in the eosio.token contract
+
+Chatbot: The `eosio.token` contract has the following tables:
+
+1. **accounts**
+   - Index Type: i64
+   - Type: account
+
+2. **stat**
+   - Index Type: i64
+   - Type: currency_stat
 ```
