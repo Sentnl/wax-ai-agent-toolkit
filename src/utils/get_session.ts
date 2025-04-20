@@ -28,10 +28,11 @@ export async function get_session(
   agent: WaxAgentToolkit,
   chainId: string,
 ): Promise<Session> {
+  const node_url: string = await agent.get_node();
   const session = new Session({
     chain: {
       id: chainId,
-      url: await agent.get_node(),
+      url: node_url,
     },
     actor: agent.accountName,
     permission: "active",

@@ -3,9 +3,12 @@ export * from "./wax";
 import { WaxAgentToolkit } from "../agent";
 import {
   WaxBalanceOtherTool,
-  WaxBalanceTool,
   WaxBuyRamTool,
   WaxSellRamTool,
+  WaxTransferTool,
+  WaxGetAccountInfoTool,
+  WaxContractExecuteActionTool,
+  WaxContractListActionTool,
 } from "./index";
 
 /**
@@ -18,6 +21,10 @@ import {
  *   - WaxBalanceTool: For checking your own account balance
  *   - WaxBuyRamTool: For purchasing RAM
  *   - WaxSellRamTool: For selling RAM
+ *   - WaxTransferTool: For transferring tokens
+ *   - WaxGetAccountInfoTool: For getting account information
+ *   - WaxContractExecuteActionTool: For executing actions on a contract
+ *   - WaxContractListActionTool: For listing actions on a contract
  * @example
  * ```typescript
  * const waxTools = createWaxTools(waxAgentkit);
@@ -26,8 +33,11 @@ import {
 export function createWaxTools(waxAgentkit: WaxAgentToolkit) {
   return [
     new WaxBalanceOtherTool(waxAgentkit),
-    new WaxBalanceTool(waxAgentkit),
     new WaxBuyRamTool(waxAgentkit),
     new WaxSellRamTool(waxAgentkit),
+    new WaxTransferTool(waxAgentkit),
+    new WaxGetAccountInfoTool(waxAgentkit),
+    new WaxContractExecuteActionTool(waxAgentkit),
+    new WaxContractListActionTool(waxAgentkit),
   ];
 }

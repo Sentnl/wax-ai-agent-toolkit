@@ -14,22 +14,15 @@ import { get_balance_other } from "../../tools/wax/get_balance_others";
  */
 export class WaxBalanceOtherTool extends Tool {
   /** Tool identifier */
-  name = "wax_balance_other";
+  name = "wax_balance";
 
   /** Detailed description of the tool's functionality */
-  description = `Get the balance of ANOTHER wallet (not your own) or token account on WAX.
-  
-    This tool should be used when checking someone else's wallet balance or another wallet address.
-    For questions like "How much WAX does account X have?" or "What's the TOKEN balance of account Y?".
-    
-    Input for checking WAX balance:
-    {"accountName":"sentnltestin"}
-    
-    Input for checking token balance:
-    {"accountName":"sentnltestin", "tokenContract":"eosio.token", "tokenSymbol":"TOKEN"}
-    
-    Example: To check someone's WAX balance: {"accountName":"sentnltestin"}
-    Example: To check someone's TOKEN balance: {"accountName":"sentnltestin", "tokenContract":"eosio.token", "tokenSymbol":"TOKEN"}`;
+  description = `Handles balance checks for WAX accounts.
+  Expects a JSON input with "accountName" (optional), "tokenContract" (optional), and "tokenSymbol" (optional).
+  Example: {} for WAX balance of my account
+  Example: {"tokenContract": "custom.token", "tokenSymbol": "TOKEN"} for token balance of my account
+  Example: {"accountName": "sentnltestin"} for WAX balance of sentnltestin account
+  Example: {"accountName": "sentnltestin", "tokenContract": "eosio.token", "tokenSymbol": "TOKEN"} for token balance of sentnltestin account`;
 
   /**
    * Creates a new instance of WaxBalanceOtherTool

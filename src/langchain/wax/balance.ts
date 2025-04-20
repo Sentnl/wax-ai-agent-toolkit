@@ -3,7 +3,7 @@ import { WaxAgentToolkit } from "../../agent";
 import { get_balance } from "../../tools/wax/balance";
 
 /**
- * Tool for checking the balance of your own WAX account or token
+ * Tool for checking token balances in a WAX account
  *
  * @class WaxBalanceTool
  * @extends Tool
@@ -16,14 +16,11 @@ export class WaxBalanceTool extends Tool {
   name = "wax_balance";
 
   /** Detailed description of the tool's functionality */
-  description = `Get the balance of your WAX account or token.
-
-  If you want to get the balance of your wallet, you don't need to provide the tokenContract and tokenSymbol.
-  If no tokenContract and tokenSymbol are provided, the balance will be in WAX.
-
-  Inputs ( input is a JSON string ):
-  tokenContract: string, eg "eosio.token" (optional)
-  tokenSymbol: string, eg "TOKEN" (optional)`;
+  description = `Handles balance checks for your WAX account.
+  Expects a JSON input with "tokenContract" (optional) and "tokenSymbol" (optional).
+  Example: {} for WAX balance
+  Example: {"tokenContract": "eosio.token", "tokenSymbol": "WAX"} for WAX balance
+  Example: {"tokenContract": "custom.token", "tokenSymbol": "TOKEN"} for token balance`;
 
   /**
    * Creates a new instance of WaxBalanceTool
@@ -34,17 +31,20 @@ export class WaxBalanceTool extends Tool {
   }
 
   /**
-   * Executes the balance check for your account
-   * @param input - Optional JSON string containing:
-   *   - tokenContract: Optional token contract name (e.g., "eosio.token")
-   *   - tokenSymbol: Optional token symbol (e.g., "TOKEN")
+   * Executes the balance check operation
+   * @param input - JSON string containing:
+   *   - tokenContract: Token contract name (e.g., "eosio.token")
+   *   - tokenSymbol: Token symbol (e.g., "WAX")
    * @returns Promise resolving to a JSON string containing:
    *   - status: "success" or "error"
-   *   - balance: The account's balance (if successful)
+   *   - balance: The account's token balance
    *   - token: The token type checked (WAX or token@contract)
    *   - message: Error message (if error occurred)
    *   - code: Error code (if error occurred)
-   * @throws Error if input parsing fails or balance check fails
+   * @throws Error if:
+   *   - Input parsing fails
+   *   - Invalid input parameters provided
+   *   - Balance check fails
    */
   protected async _call(input: string): Promise<string> {
     try {
@@ -56,9 +56,6 @@ export class WaxBalanceTool extends Tool {
         tokenSymbol = parsedInput.tokenSymbol;
       }
 
-      // Use the get_balance function from tools/wax/balance.ts
-      console.log("tokenContract", tokenContract);
-      console.log("tokenSymbol", tokenSymbol);
       const balance = await get_balance(
         this.waxToolKit,
         tokenContract,
