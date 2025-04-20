@@ -63,11 +63,6 @@ This is a TypeScript toolkit that combines LangChain with WAX blockchain capabil
    - `list_table`: List contract tables
    - `read_table`: Read contract table data
 
-5. **Documentation**
-   ```bash
-   # Generate documentation
-   pnpm docs
-   ```
 
 ## Technical Stack
 - TypeScript
