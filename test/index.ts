@@ -71,7 +71,10 @@ async function initializeAgent() {
     const tools = createWaxTools(waxAgent);
 
     const memory = new MemorySaver();
-    const config = { configurable: { thread_id: "Wax Agent Kit!" } };
+    const config = {
+      configurable: { thread_id: "Wax Agent Kit!" },
+      recursionLimit: 100,
+    };
 
     const agent = createReactAgent({
       llm,

@@ -22,24 +22,15 @@ export class WaxContractListTablesTool extends Tool {
   name = "wax_contract_list_tables";
 
   /** Detailed description of the tool's functionality */
-  description = `List all available tables of a smart contract on the WAX blockchain.
-  
-    This tool should be used when you need to:
-    - View all available tables of a contract
-    - Understand what operations a contract supports
-    - Debug contract interactions
-    
-    Input format:
-    {
-      "contract_name": "string"  // The name of the contract to query (e.g., "eosio.token")
-    }
-    
-    Examples:
-    1. List tables of eosio.token contract:
-       {"contract_name":"eosio.token"}
-    
-    2. List tables of a custom contract:
-       {"contract_name":"mycontract"}`;
+  description = `Handles listing available tables for a WAX blockchain smart contract.
+  Expects a JSON input with "contract_name" (required).
+  Example: {"contract_name": "eosio.token"} for eosio.token contract tables
+  Example: {"contract_name": "mycontract"} for custom contract tables
+
+  This tool helps you:
+  - View all available tables of a contract
+  - Understand what operations a contract supports 
+  - Debug contract interactions`;
 
   /**
    * Creates a new instance of WaxContractListTablesTool

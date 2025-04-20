@@ -9,6 +9,8 @@ import {
   WaxGetAccountInfoTool,
   WaxContractExecuteActionTool,
   WaxContractListActionTool,
+  WaxContractListTablesTool,
+  WaxContractReadTableTool,
 } from "./index";
 
 /**
@@ -39,5 +41,7 @@ export function createWaxTools(waxAgentkit: WaxAgentToolkit) {
     new WaxGetAccountInfoTool(waxAgentkit),
     new WaxContractExecuteActionTool(waxAgentkit),
     new WaxContractListActionTool(waxAgentkit),
+    new WaxContractListTablesTool(waxAgentkit),
+    new WaxContractReadTableTool(waxAgentkit),
   ];
 }

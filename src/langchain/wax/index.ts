@@ -6,3 +6,5 @@ export * from "./transfer";
 export * from "./get_account_info";
 export * from "./contract_execute_action";
 export * from "./contract_list_action";
+export * from "./contract_list_tables";
+export * from "./contract_read_table";
