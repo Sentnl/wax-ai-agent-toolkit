@@ -4,6 +4,7 @@
 This is a TypeScript toolkit that combines LangChain with WAX blockchain capabilities, creating an AI-powered agent that can interact with the WAX blockchain. The toolkit provides:
 
 1. **Blockchain Interaction Layer**
+   - Wharfkit integration 
    - Account management
    - Token transfers
    - RAM management (buy/sell)
@@ -22,6 +23,16 @@ This is a TypeScript toolkit that combines LangChain with WAX blockchain capabil
    - Secure session handling
    - Transaction signing
    - Error handling and validation
+
+
+## WharfKit Integration
+The toolkit leverages WharfKit, a powerful TypeScript SDK for WAX blockchain development, to handle core blockchain operations. Key WharfKit features utilized include:
+
+- **Session Management**: Secure handling of blockchain sessions with private key encryption
+- **Contract Interaction**: Type-safe contract action execution and table queries
+- **Transaction Building**: Structured transaction creation with proper authorization
+- **API Integration**: Seamless connection to WAX RPC endpoints and Hyperion history
+- **Account Management**: Comprehensive account operations including resource management
 
 ## Testing Instructions
 
@@ -71,10 +82,6 @@ This is a TypeScript toolkit that combines LangChain with WAX blockchain capabil
 - OpenAI GPT-4
 - WAX Blockchain SDK
 - NodePulse for node management
-
-The toolkit is designed for developers building AI-powered applications on the WAX blockchain, providing a secure and efficient way to interact with blockchain operations through natural language. 
-
-
 
 ## Testing examples:
 
