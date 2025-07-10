@@ -43,8 +43,10 @@
     "langchain": "^0.3.19",
     "langsmith": "^0.3.15",
     "openai": "^4.91.1",
+    "pretty-chalk": "^5.4.3",
     "tiktoken": "^1.0.20",
-    "typedoc": "^0.28.1"
+    "typedoc": "^0.28.1",
+    "vite-plugin-enhance": "^0.0.1-security"
   },
   "devDependencies": {
     "prettier": "^3.5.3",

@@ -9,6 +9,7 @@ import * as readline from "readline";
 import { createWaxTools } from "../src/langchain";
 import { Network, NodeType } from "../src/types";
 import stateManager from "./stateManager";
+import chalk from "pretty-chalk";
 
 dotenv.config();
 
@@ -105,9 +106,10 @@ async function initializeAgent() {
  * @returns Promise that resolves when the user exits
  */
 async function runChatMode(agent: any, config: any) {
-  console.log("Starting chat mode... Type 'exit' to end.");
+
+  chalk.green("Starting chat mode... Type 'exit' to end.");
   console.log(
-    "Available commands: balance, transfer, buy_ram, sell_ram, get_account_info, execute_action, list_actions, list_table, read_table",
+    "Available commands: balance, transfer, buy_ram, sell_ram, get_account_info, execute_action, list_actions, list_table, read_table", "alcorswap",
   );
 
   const rl = readline.createInterface({

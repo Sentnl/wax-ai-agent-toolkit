@@ -1,4 +1,5 @@
 export * from "./wax";
+export * from "./alcor";
 
 import { WaxAgentToolkit } from "../agent";
 import {
@@ -11,6 +12,7 @@ import {
   WaxContractListActionTool,
   WaxContractListTablesTool,
   WaxContractReadTableTool,
+  AlcorSwapActionTool
 } from "./index";
 
 /**
@@ -43,5 +45,6 @@ export function createWaxTools(waxAgentkit: WaxAgentToolkit) {
     new WaxContractListActionTool(waxAgentkit),
     new WaxContractListTablesTool(waxAgentkit),
     new WaxContractReadTableTool(waxAgentkit),
+    new AlcorSwapActionTool(waxAgentkit)
   ];
 }
